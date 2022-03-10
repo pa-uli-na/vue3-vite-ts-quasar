@@ -1,52 +1,19 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
-defineProps<{ msg: string }>()
-
-const count = ref(0)
+defineProps<{ msg: string }>();
 </script>
 
 <template>
   <h1>{{ msg }}</h1>
 
-  <p>
-    Recommended IDE setup:
-    <a href="https://code.visualstudio.com/" target="_blank">VSCode</a>
-    +
-    <a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>
-  </p>
-
-  <p>See <code>README.md</code> for more information.</p>
-
-  <p>
-    <a href="https://vitejs.dev/guide/features.html" target="_blank">
-      Vite Docs
-    </a>
-    |
-    <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Docs</a>
-  </p>
-
-  <button type="button" @click="count++">count is: {{ count }}</button>
-  <p>
-    Edit
-    <code>components/HelloWorld.vue</code> to test hot module replacement.
-  </p>
+  <h4>Buttons</h4>
+  <div class="q-pa-md q-gutter-sm">
+    <q-btn color="white" text-color="black" label="Standard" />
+    <q-btn color="primary" label="Primary" />
+    <q-btn color="secondary" label="Secondary" />
+    <q-btn color="amber" glossy label="Amber" />
+    <q-btn color="brown-5" label="Brown 5" />
+    <q-btn color="deep-orange" glossy label="Deep Orange" />
+    <q-btn color="purple" label="Purple" />
+    <q-btn color="black" label="Black" />
+  </div>
 </template>
-
-<style scoped>
-a {
-  color: #42b983;
-}
-
-label {
-  margin: 0 0.5em;
-  font-weight: bold;
-}
-
-code {
-  background-color: #eee;
-  padding: 2px 4px;
-  border-radius: 4px;
-  color: #304455;
-}
-</style>
