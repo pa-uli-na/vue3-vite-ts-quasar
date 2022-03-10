@@ -1,14 +1,16 @@
 import { getDataAxios } from "./axios";
-// import { UserModel } from "./types";
+import { UserModel, UserToken } from "./types";
 
 const api = getDataAxios();
 
-export const login = async (authorization: string): Promise<void> => {
-  await api.get<void>("/account/login", {
-    headers: {
-      Authorization: `Basic ${authorization}`,
-    },
+export const login = async (
+  username: string,
+  password: string
+): Promise<UserToken> => {
+  const response = await api.post<UserToken>("/auth/login", {
+    params: { username, password },
   });
+  return response.data;
 };
 
 export const logout = async (): Promise<void> => {

@@ -3,6 +3,14 @@ export interface ErrorResponse {
   message: string;
 }
 
+export interface UserModel {
+  user: string;
+}
+
+export interface UserToken {
+  token: string;
+}
+
 /** PRODUCT  */
 export interface ProductDTO {
   id: number;
