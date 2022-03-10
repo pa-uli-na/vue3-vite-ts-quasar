@@ -1,12 +1,46 @@
 <script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import HelloWorld from "./components/HelloWorld.vue";
+import { onMounted, ref } from "vue";
+import { fakeStoreProcessV1 } from "./api";
+import { ProductDTO } from "./api/fakeStoreProcess/v1/types";
+
+const products = ref<ProductDTO[]>([]);
+const columns = [
+  { name: "id", field: "id", label: "ID" },
+  { name: "title", field: "title", label: "Tytuł" },
+  { name: "price", field: "price", label: "Cena" },
+  { name: "category", field: "category", label: "Kategoria" },
+  { name: "description", field: "description", label: "Opis" },
+  { name: "image", field: "image", label: "Zdjęcie" },
+  { name: "rating", field: "rating", label: "Ocena" },
+];
+
+const visibleColumns = ref(["id", "title", "price"]);
+
+onMounted(async () => {
+  try {
+    loadingRef.value = true;
+    products.value = await fakeStoreProcessV1.getProducts();
+    console.log(products.value);
+    loadingRef.value = false;
+  } catch (error) {
+    console.log(error);
+    loadingRef.value = false;
+  }
+});
+
+const loadingRef = ref(false);
 </script>
 
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Vue 3 + TypeScript + Vite + Quasar" />
+  <q-table
+    dense
+    row-key="id"
+    title="Products"
+    :loading="loadingRef"
+    :columns="columns"
+    :rows="products"
+    :visible-columns="visibleColumns"
+  ></q-table>
 </template>
 
 <style>
